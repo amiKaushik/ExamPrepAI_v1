@@ -34,6 +34,7 @@ st.markdown("""
             color: #f1f1f1;
         }
     }
+
     @media (max-width: 768px) {
         .feature-card {
             padding: 1rem;
@@ -67,20 +68,28 @@ st.markdown("""
         bottom: 0;
     }
 
-    .content {
-        min-height: calc(100vh - 200px);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+    .app-header {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        text-align: center;
     }
 
-    /* General link styling */
-    a {
-        color: #64b5f6;
+    .app-header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-    a:hover {
-        text-decoration: underline;
+
+    .app-header p {
+        font-size: 1.2rem;
+        font-weight: 400;
     }
+
     .custom-footer {
         background-color: #1e1e1e;
         color: #ccc;
@@ -144,9 +153,14 @@ else:
         del st.session_state['gemini_api_key']
         st.rerun()
 
-st.title("🏠 App Home")
+st.markdown("""
+    <div class="app-header">
+        <h1>🏠 App Home</h1>
+        <p>Your personalized AI study companion for efficient exam preparation</p>
+    </div>
+""", unsafe_allow_html=True)
+
 st.markdown("---")
-st.markdown("Your personalized AI study companion for efficient exam preparation")
 
 col1, col2 = st.columns(2)
 
