@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.openai_tools import generate_study_plan
+from utils.ai_tools import generate_study_plan
 
 st.set_page_config(
     page_title="Study Plan - ExamPrepAI",
@@ -64,13 +64,22 @@ else:
             st.markdown("### 📖 Generated Study Plan")
             st.markdown(study_plan)
             
-            # Add download button
-            st.download_button(
-                label="📥 Download Study Plan",
-                data=study_plan,
-                file_name=f"study_plan_{subject.replace(' ', '_')}.txt",
-                mime="text/plain"
-            )
+            # Add download buttons
+            col1, col2 = st.columns(2)
+            with col1:
+                st.download_button(
+                    label="📥 Download as TXT",
+                    data=study_plan,
+                    file_name=f"study_plan_{subject.replace(' ', '_')}.txt",
+                    mime="text/plain"
+                )
+            with col2:
+                st.download_button(
+                    label="📥 Download as Markdown",
+                    data=study_plan,
+                    file_name=f"study_plan_{subject.replace(' ', '_')}.md",
+                    mime="text/markdown"
+                )
             
             # Add a feedback section
             st.markdown("---")
@@ -84,4 +93,4 @@ else:
                     st.info("We'll try to improve our study plans.")
             with col3:
                 if st.button("🔄 Generate New Plan"):
-                    st.rerun() 
+                    st.rerun()
