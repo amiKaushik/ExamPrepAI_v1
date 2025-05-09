@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.ai_tools import generate_mock_questions
+from utils.openai_tools import generate_mock_questions
 
 st.set_page_config(
     page_title="Mock Questions - ExamPrepAI",
@@ -17,7 +17,7 @@ else:
     
     subject = st.text_input("📚 Subject:", placeholder="Enter your subject...")
     topics = st.text_area("📝 Topics (one per line):", placeholder="Enter topics to generate questions for...", height=100)
-    
+
     with st.expander("⚙️ Advanced Options"):
         col1, col2 = st.columns(2)
         with col1:
@@ -28,9 +28,13 @@ else:
             )
             num_questions = st.number_input("Number of Questions:", min_value=1, max_value=20, value=5)
         with col2:
-            difficulty = st.select_slider("Difficulty Level", options=["Easy", "Medium", "Hard"], value="Medium")
+            difficulty = st.select_slider(
+                "Difficulty Level",
+                options=["Easy", "Medium", "Hard"],
+                value="Medium"
+            )
             include_answers = st.checkbox("Include Answers", value=True)
-    
+
     if st.button("📖 Generate Questions", use_container_width=True) and subject and topics:
         with st.spinner("Generating questions..."):
             prompt = f"Subject: {subject}\n"
@@ -38,31 +42,30 @@ else:
             prompt += f"Question Types: {', '.join(question_type)}\n"
             prompt += f"Number of Questions: {num_questions}\n"
             prompt += f"Difficulty: {difficulty}\n"
-            
             if include_answers:
                 prompt += "Include answers for each question.\n"
-            
+
             questions = generate_mock_questions(prompt, st.session_state['gemini_api_key'])
-            
+
             st.markdown("### 📖 Generated Questions")
             st.markdown(questions)
-            
-            col1, col2 = st.columns(2)
-            with col1:
+
+            file_format = st.radio("Choose file format for download:", ("TXT", "Markdown"))
+            if file_format == "TXT":
                 st.download_button(
-                    label="📥 Download as TXT",
+                    label="📥 Download Questions as TXT",
                     data=questions,
                     file_name=f"mock_questions_{subject.replace(' ', '_')}.txt",
                     mime="text/plain"
                 )
-            with col2:
+            else:
                 st.download_button(
-                    label="📥 Download as Markdown",
+                    label="📥 Download Questions as Markdown",
                     data=questions,
                     file_name=f"mock_questions_{subject.replace(' ', '_')}.md",
                     mime="text/markdown"
                 )
-            
+
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
             col1, col2, col3 = st.columns(3)
