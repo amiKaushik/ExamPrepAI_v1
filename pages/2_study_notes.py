@@ -14,8 +14,14 @@ if 'gemini_api_key' not in st.session_state:
 else:
     st.title("📚 Study Notes Generator")
     st.markdown("Generate comprehensive study notes on any topic.")
-    
+
     topic = st.text_input("📝 Topic:", placeholder="Enter the topic you want to study...")
+
+    syllabus = st.text_area(
+        "📋 Syllabus (Optional):",
+        placeholder="Paste the syllabus outline or bullet points if you have them...",
+        height=120
+    )
 
     with st.expander("⚙️ Advanced Options"):
         col1, col2 = st.columns(2)
@@ -28,19 +34,21 @@ else:
         with col2:
             include_examples = st.checkbox("Include Examples", value=True)
             include_diagrams = st.checkbox("Include Diagram Descriptions", value=True)
-    
+
     if st.button("📖 Generate Notes", use_container_width=True) and topic:
         with st.spinner("Generating study notes..."):
-            prompt = f"Generate study notes on: {topic}\n\n"
+            prompt = f"Generate study notes on the topic: {topic}.\n"
+            if syllabus.strip():
+                prompt += f"\nFocus especially on the following syllabus outline:\n{syllabus.strip()}\n"
             if detail_level == "Basic":
-                prompt += "Provide basic concepts and key points."
+                prompt += "\nProvide basic concepts and key points."
             elif detail_level == "In-depth":
-                prompt += "Provide detailed explanations with advanced concepts."
+                prompt += "\nProvide detailed explanations with advanced concepts."
             if include_examples:
                 prompt += " Include practical examples."
             if include_diagrams:
                 prompt += " Include descriptions of relevant diagrams or visual aids."
-            
+
             notes = generate_study_notes(prompt, st.session_state['gemini_api_key'])
 
             st.markdown("### 📖 Generated Notes")
@@ -52,7 +60,7 @@ else:
                 file_name=f"study_notes_{topic.replace(' ', '_')}.md",
                 mime="text/markdown"
             )
-            
+
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
             col1, col2, col3 = st.columns(3)
