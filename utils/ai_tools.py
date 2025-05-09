@@ -5,9 +5,6 @@ def configure_genai(api_key):
     """Configure the Gemini API with the provided API key."""
     try:
         genai.configure(api_key=api_key)
-        # List available models
-        models = [m.name for m in genai.list_models()]
-        st.sidebar.info(f"Available models: {', '.join(models)}")
         return True
     except Exception as e:
         st.error(f"Error configuring Gemini API: {str(e)}")
