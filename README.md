@@ -16,7 +16,7 @@
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/ExamPrepAI.git
+   git clone https://github.com/amiKaushik/ExamPrepAI.git
    cd ExamPrepAI
    ```
 
