@@ -42,7 +42,6 @@ st.markdown("""
         }
     }
 
-    /* Sidebar dark/light mode styles */
     section[data-testid="stSidebar"] {
         background-color: #f8f9fa;
     }
@@ -57,8 +56,8 @@ st.markdown("""
         display: inline-block;
         padding: 0.5rem 1rem;
         margin-top: 0.5rem;
-        background-color: #64b5f6;
-        color: white;
+        background-color: white;
+        color: #ff0000;
         border-radius: 8px;
         text-align: center;
         text-decoration: none;
