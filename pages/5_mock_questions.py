@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.openai_tools import generate_mock_questions
+from utils.ai_tools import generate_mock_questions
 
 st.set_page_config(
     page_title="Mock Questions - ExamPrepAI",
