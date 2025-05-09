@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.openai_tools import ask_ai_question
+from utils.ai_tools import ask_ai_question
 
 st.set_page_config(
     page_title="Question Answering - ExamPrepAI",
@@ -51,11 +51,19 @@ else:
             
             answer = ask_ai_question(full_prompt, st.session_state['gemini_api_key'])
             
-            # Display the answer in a nice format
+            # Display the answer
             st.markdown("### 📖 Answer")
-            st.markdown(answer)
+            st.markdown(answer, unsafe_allow_html=True)
+
+            # Markdown download button
+            st.download_button(
+                label="📥 Download Answer as Markdown",
+                data=answer,
+                file_name="ai_answer.md",
+                mime="text/markdown"
+            )
             
-            # Add a feedback section
+            # Feedback section
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
             col1, col2, col3 = st.columns(3)
@@ -67,4 +75,4 @@ else:
                     st.info("We'll try to improve our answers.")
             with col3:
                 if st.button("🔄 Ask Another Question"):
-                    st.rerun() 
+                    st.rerun()
