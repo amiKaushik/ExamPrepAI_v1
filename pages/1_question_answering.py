@@ -56,9 +56,10 @@ else:
             st.markdown(answer, unsafe_allow_html=True)
 
             if file_format == "TXT":
+                answer_plain_text = answer.replace("**", "").replace("*", "").replace("`", "")
                 st.download_button(
                     label="📥 Download Answer as TXT",
-                    data=answer,
+                    data=answer_plain_text,
                     file_name="ai_answer.txt",
                     mime="text/plain"
                 )
