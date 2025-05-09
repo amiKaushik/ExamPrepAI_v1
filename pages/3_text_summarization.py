@@ -30,7 +30,7 @@ else:
             include_bullet_points = st.checkbox("Use Bullet Points", value=True)
             include_code_examples = st.checkbox("Include Code Examples", value=True)
 
-    file_format = st.selectbox("Select file format for the summary:", ["TXT", "MD"])
+    file_format = st.radio("Select file format for the summary:", ["TXT", "MD"])
 
     if st.button("📖 Generate Summary", use_container_width=True) and text:
         with st.spinner("Generating summary..."):
