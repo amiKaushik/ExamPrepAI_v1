@@ -20,16 +20,14 @@ st.markdown("""
         border-radius: 10px;
     }
 
-    /* General styling for feature cards */
     .feature-card {
         background-color: #f0f2f6;
         padding: 1.5rem;
         border-radius: 10px;
         margin: 1rem 0;
-        color: #000;  /* Ensures text is black in light mode */
+        color: #000;
     }
 
-    /* Styling for feature cards in dark mode */
     @media (prefers-color-scheme: dark) {
         .feature-card {
             background-color: #1e1e1e;
@@ -37,7 +35,6 @@ st.markdown("""
         }
     }
 
-    /* Responsive design for smaller screens */
     @media (max-width: 768px) {
         .feature-card {
             padding: 1rem;
@@ -45,9 +42,8 @@ st.markdown("""
         }
     }
 
-    /* Sidebar styling */
     section[data-testid="stSidebar"] {
-        background-color: #f8f9fa !important; /* Force sidebar to stay white */
+        background-color: #f8f9fa !important;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -57,7 +53,6 @@ st.markdown("""
         }
     }
 
-    /* Sidebar link button styling */
     .sidebar-link-button {
         display: inline-block;
         padding: 0.5rem 1rem;
@@ -74,7 +69,6 @@ st.markdown("""
         background-color: #42a5f5;
     }
 
-    /* Footer Styling */
     .footer {
         background-color: #2c2c2c;
         color: #f1f1f1;
@@ -85,7 +79,6 @@ st.markdown("""
         bottom: 0;
     }
 
-    /* Content Styling */
     .content {
         min-height: calc(100vh - 200px);
         display: flex;
@@ -93,7 +86,6 @@ st.markdown("""
         justify-content: space-between;
     }
 
-    /* General link styling */
     a {
         color: #64b5f6;
     }
@@ -101,7 +93,6 @@ st.markdown("""
         text-decoration: underline;
     }
 
-    /* Footer custom styles */
     .custom-footer {
         background-color: #1e1e1e;
         color: #ccc;
@@ -148,7 +139,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 if 'gemini_api_key' not in st.session_state:
-    st.sidebar.subheader("🔑 API Key Setup")
+    st.sidebar.subheader("🔑 :blue[API Key Setup]")
     gemini_key = st.sidebar.text_input("Enter your Gemini API key:", type="password")
     if gemini_key:
         st.session_state['gemini_api_key'] = gemini_key
