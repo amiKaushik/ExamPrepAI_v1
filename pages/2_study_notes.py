@@ -35,6 +35,8 @@ else:
             include_examples = st.checkbox("Include Examples", value=True)
             include_diagrams = st.checkbox("Include Diagram Descriptions", value=True)
 
+    file_format = st.radio("Choose file format for download:", ("TXT", "Markdown"))
+
     if st.button("📖 Generate Notes", use_container_width=True) and topic:
         with st.spinner("Generating study notes..."):
             prompt = f"Generate study notes on the topic: {topic}.\n"
@@ -54,12 +56,20 @@ else:
             st.markdown("### 📖 Generated Notes")
             st.markdown(notes)
 
-            st.download_button(
-                label="📥 Download Notes as Markdown",
-                data=notes,
-                file_name=f"study_notes_{topic.replace(' ', '_')}.md",
-                mime="text/markdown"
-            )
+            if file_format == "TXT":
+                st.download_button(
+                    label="📥 Download Notes as TXT",
+                    data=notes,
+                    file_name=f"study_notes_{topic.replace(' ', '_')}.txt",
+                    mime="text/plain"
+                )
+            else:
+                st.download_button(
+                    label="📥 Download Notes as Markdown",
+                    data=notes,
+                    file_name=f"study_notes_{topic.replace(' ', '_')}.md",
+                    mime="text/markdown"
+                )
 
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
