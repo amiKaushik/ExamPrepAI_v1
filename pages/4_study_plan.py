@@ -17,18 +17,12 @@ else:
     
     col1, col2 = st.columns(2)
     with col1:
-        subject = st.text_input("📚 Subject:", 
-                              placeholder="Enter your subject...")
+        subject = st.text_input("📚 Subject:", placeholder="Enter your subject...")
         exam_date = st.date_input("📅 Exam Date:")
     with col2:
-        topics = st.text_area("📝 Topics (one per line):", 
-                            placeholder="Enter your topics here...",
-                            height=100)
-        study_hours = st.number_input("⏰ Daily Study Hours:", 
-                                    min_value=1, 
-                                    max_value=12, 
-                                    value=4)
-        
+        topics = st.text_area("📝 Topics (one per line):", placeholder="Enter your topics here...", height=100)
+        study_hours = st.number_input("⏰ Daily Study Hours:", min_value=1, max_value=12, value=4)
+    
     with st.expander("⚙️ Advanced Options"):
         col1, col2 = st.columns(2)
         with col1:
@@ -53,17 +47,22 @@ else:
             prompt += f"Topics:\n{topics}\n"
             prompt += f"Daily Study Hours: {study_hours}\n"
             prompt += f"Difficulty Level: {difficulty_level}\n"
-            prompt += "Please generate the study plan in plain text format without any markdown, bullet points, or headings.\n"
             
             if include_breaks:
                 prompt += "Include break times in the schedule.\n"
             if include_revision:
                 prompt += "Include dedicated revision days.\n"
             
+            if file_format == "Markdown":
+                prompt += "Please generate the study plan in **Markdown** format. Use headings, bullet points, and lists as needed.\n"
+            else:
+                prompt += "Please generate the study plan in plain text format without any markdown, bullet points, or headings.\n"
+            
             study_plan = generate_study_plan(prompt, st.session_state['gemini_api_key'])
             
             st.markdown("### 📖 Generated Study Plan")
             st.markdown(study_plan)
+            
             if file_format == "Plain Text":
                 st.download_button(
                     label="📥 Download as TXT",
