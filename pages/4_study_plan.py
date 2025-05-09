@@ -14,8 +14,7 @@ if 'gemini_api_key' not in st.session_state:
 else:
     st.title("📅 Study Plan Generator")
     st.markdown("Create personalized study plans based on your syllabus and exam date.")
-
-
+    
     col1, col2 = st.columns(2)
     with col1:
         subject = st.text_input("📚 Subject:", 
@@ -29,7 +28,7 @@ else:
                                     min_value=1, 
                                     max_value=12, 
                                     value=4)
-    
+        
     with st.expander("⚙️ Advanced Options"):
         col1, col2 = st.columns(2)
         with col1:
@@ -41,6 +40,11 @@ else:
         with col2:
             include_breaks = st.checkbox("Include Break Times", value=True)
             include_revision = st.checkbox("Include Revision Days", value=True)
+    
+    file_format = st.radio(
+        "Choose file format for download:",
+        ("Markdown", "Plain Text")
+    )
     
     if st.button("📖 Generate Study Plan", use_container_width=True) and subject and topics:
         with st.spinner("Generating study plan..."):
@@ -57,19 +61,17 @@ else:
                 prompt += "Include dedicated revision days.\n"
             
             study_plan = generate_study_plan(prompt, st.session_state['gemini_api_key'])
-
+            
             st.markdown("### 📖 Generated Study Plan")
             st.markdown(study_plan)
-            
-            col1, col2 = st.columns(2)
-            with col1:
+            if file_format == "Plain Text":
                 st.download_button(
                     label="📥 Download as TXT",
                     data=study_plan,
                     file_name=f"study_plan_{subject.replace(' ', '_')}_plain.txt",
                     mime="text/plain"
                 )
-            with col2:
+            else:
                 st.download_button(
                     label="📥 Download as Markdown",
                     data=study_plan,
