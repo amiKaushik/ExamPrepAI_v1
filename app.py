@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="App Home - ExamPrepAI",
+    page_title="ExamPrepAI",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -155,7 +155,7 @@ else:
 
 st.markdown("""
     <div class="app-header">
-        <h1>🏠 App Home</h1>
+        <h1>ExamPrepAI🤖</h1>
         <p>Your personalized AI study companion for efficient exam preparation</p>
     </div>
 """, unsafe_allow_html=True)
