@@ -13,7 +13,7 @@ if 'gemini_api_key' not in st.session_state:
         st.switch_page("app.py")
 else:
     st.title("📚 Study Notes Generator")
-    st.markdown("Generate comprehensive study notes on any topic.")
+    st.markdown("Generate comprehensive study notes on any topic with code examples.")
 
     topic = st.text_input("📝 Topic:", placeholder="Enter the topic you want to study...")
 
@@ -32,7 +32,7 @@ else:
                 value="Comprehensive"
             )
         with col2:
-            include_examples = st.checkbox("Include Examples", value=True)
+            include_examples = st.checkbox("Include Code Examples", value=True)
             include_diagrams = st.checkbox("Include Diagram Descriptions", value=True)
 
     file_format = st.radio("Choose file format for download:", ("TXT", "Markdown"))
@@ -47,7 +47,7 @@ else:
             elif detail_level == "In-depth":
                 prompt += "\nProvide detailed explanations with advanced concepts."
             if include_examples:
-                prompt += " Include practical examples."
+                prompt += " Include practical code examples for every concept discussed."
             if include_diagrams:
                 prompt += " Include descriptions of relevant diagrams or visual aids."
 
