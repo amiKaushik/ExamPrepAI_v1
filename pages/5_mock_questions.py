@@ -7,7 +7,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Check for API key
 if 'gemini_api_key' not in st.session_state:
     st.warning("Please set up your Gemini API key on the main page first.")
     if st.button("🏠 Go to Main Page"):
@@ -16,15 +15,9 @@ else:
     st.title("📝 Mock Exam Questions")
     st.markdown("Generate practice questions and test your knowledge.")
     
-    # Input fields
-    subject = st.text_input("📚 Subject:", 
-                          placeholder="Enter your subject...")
+    subject = st.text_input("📚 Subject:", placeholder="Enter your subject...")
+    topics = st.text_area("📝 Topics (one per line):", placeholder="Enter topics to generate questions for...", height=100)
     
-    topics = st.text_area("📝 Topics (one per line):", 
-                         placeholder="Enter topics to generate questions for...",
-                         height=100)
-    
-    # Advanced options
     with st.expander("⚙️ Advanced Options"):
         col1, col2 = st.columns(2)
         with col1:
@@ -33,21 +26,13 @@ else:
                 ["Multiple Choice", "Short Answer", "Long Answer", "True/False"],
                 default=["Multiple Choice", "Short Answer"]
             )
-            num_questions = st.number_input("Number of Questions:", 
-                                          min_value=1, 
-                                          max_value=20, 
-                                          value=5)
+            num_questions = st.number_input("Number of Questions:", min_value=1, max_value=20, value=5)
         with col2:
-            difficulty = st.select_slider(
-                "Difficulty Level",
-                options=["Easy", "Medium", "Hard"],
-                value="Medium"
-            )
+            difficulty = st.select_slider("Difficulty Level", options=["Easy", "Medium", "Hard"], value="Medium")
             include_answers = st.checkbox("Include Answers", value=True)
     
     if st.button("📖 Generate Questions", use_container_width=True) and subject and topics:
         with st.spinner("Generating questions..."):
-            # Prepare the prompt with all options
             prompt = f"Subject: {subject}\n"
             prompt += f"Topics:\n{topics}\n"
             prompt += f"Question Types: {', '.join(question_type)}\n"
@@ -59,11 +44,9 @@ else:
             
             questions = generate_mock_questions(prompt, st.session_state['gemini_api_key'])
             
-            # Display the questions in a nice format
             st.markdown("### 📖 Generated Questions")
             st.markdown(questions)
             
-            # Add download button
             st.download_button(
                 label="📥 Download Questions",
                 data=questions,
@@ -71,7 +54,6 @@ else:
                 mime="text/plain"
             )
             
-            # Add a feedback section
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
             col1, col2, col3 = st.columns(3)
@@ -83,4 +65,4 @@ else:
                     st.info("We'll try to improve our questions.")
             with col3:
                 if st.button("🔄 Generate New Questions"):
-                    st.rerun() 
+                    st.rerun()
