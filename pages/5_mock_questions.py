@@ -35,6 +35,8 @@ else:
             )
             include_answers = st.checkbox("Include Answers", value=True)
 
+    file_format = st.radio("Choose file format for download:", ("Markdown", "Plain Text"))
+
     if st.button("📖 Generate Questions", use_container_width=True) and subject and topics:
         with st.spinner("Generating questions..."):
             prompt = f"Subject: {subject}\n"
@@ -44,23 +46,26 @@ else:
             prompt += f"Difficulty: {difficulty}\n"
             if include_answers:
                 prompt += "Include answers for each question.\n"
+            if file_format == "Markdown":
+                prompt += "Return questions in **Markdown** format with proper formatting.\n"
+            else:
+                prompt += "Return questions in plain text without any markdown formatting.\n"
 
             questions = generate_mock_questions(prompt, st.session_state['gemini_api_key'])
 
             st.markdown("### 📖 Generated Questions")
             st.markdown(questions)
 
-            file_format = st.radio("Choose file format for download:", ("TXT", "Markdown"))
-            if file_format == "TXT":
+            if file_format == "Plain Text":
                 st.download_button(
-                    label="📥 Download Questions as TXT",
+                    label="📥 Download as TXT",
                     data=questions,
                     file_name=f"mock_questions_{subject.replace(' ', '_')}.txt",
                     mime="text/plain"
                 )
             else:
                 st.download_button(
-                    label="📥 Download Questions as Markdown",
+                    label="📥 Download as Markdown",
                     data=questions,
                     file_name=f"mock_questions_{subject.replace(' ', '_')}.md",
                     mime="text/markdown"
