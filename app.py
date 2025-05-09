@@ -6,6 +6,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
 st.markdown("""
     <style>
     .main {
@@ -41,6 +42,33 @@ st.markdown("""
         }
     }
 
+    /* Sidebar dark/light mode styles */
+    section[data-testid="stSidebar"] {
+        background-color: #f8f9fa;
+    }
+    @media (prefers-color-scheme: dark) {
+        section[data-testid="stSidebar"] {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+    }
+
+    .sidebar-link-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin-top: 0.5rem;
+        background-color: #64b5f6;
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .sidebar-link-button:hover {
+        background-color: #42a5f5;
+    }
+
     .footer {
         background-color: #2c2c2c;
         color: #f1f1f1;
@@ -64,6 +92,49 @@ st.markdown("""
     a:hover {
         text-decoration: underline;
     }
+
+    .custom-footer {
+        background-color: #1e1e1e;
+        color: #ccc;
+        padding: 2rem 1rem;
+        text-align: center;
+        margin-top: 3rem;
+        border-top: 1px solid #444;
+        font-size: 0.95rem;
+    }
+
+    .custom-footer p {
+        margin: 0.3rem 0;
+    }
+
+    .custom-footer a {
+        color: #64b5f6;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .custom-footer a:hover {
+        text-decoration: underline;
+    }
+
+    .footer-links {
+        margin-top: 0.8rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.95rem;
+    }
+
+    .footer-icon {
+        font-size: 1.2rem;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -76,8 +147,8 @@ if 'gemini_api_key' not in st.session_state:
         st.rerun()
     else:
         st.sidebar.markdown(
-            '<a href="https://ai.google.dev/gemini-api/docs" target="_blank">'
-            '🔗 <b>Get Your API Key</b></a>', unsafe_allow_html=True
+            '<a href="https://ai.google.dev/gemini-api/docs" class="sidebar-link-button" target="_blank">'
+            '🔑 Get Your API Key</a>', unsafe_allow_html=True
         )
 else:
     st.sidebar.success("✅ API key configured")
@@ -155,55 +226,10 @@ with col3:
         st.switch_page("pages/5_mock_questions.py")
     if st.button("📄 PDF Analysis", use_container_width=True):
         st.switch_page("pages/6_pdf_analysis.py")
-        
+
 st.markdown("""
-    <style>
-    .custom-footer {
-        background-color: #1e1e1e;
-        color: #ccc;
-        padding: 2rem 1rem;
-        text-align: center;
-        margin-top: 3rem;
-        border-top: 1px solid #444;
-        font-size: 0.95rem;
-    }
-
-    .custom-footer p {
-        margin: 0.3rem 0;
-    }
-
-    .custom-footer a {
-        color: #64b5f6;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .custom-footer a:hover {
-        text-decoration: underline;
-    }
-
-    .footer-links {
-        margin-top: 0.8rem;
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-    }
-
-    .footer-links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        font-size: 0.95rem;
-    }
-
-    .footer-icon {
-        font-size: 1.2rem;
-    }
-    </style>
-
     <div class="custom-footer">
-        <p><b>Made with ❤️ for learners</b></p>
+        <p><b>Made with Love❤️ for learners</b></p>
         <div class="footer-links">
             <a href="https://github.com/amiKaushik" target="_blank">
                 <span class="footer-icon">🐙</span> GitHub
