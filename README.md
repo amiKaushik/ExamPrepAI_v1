@@ -1,4 +1,5 @@
 # ExamPrepAI
+[![Streamlit Logo](https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png)](https://examprepaiv1-wq2cvsjsv8l2axouj7whz3.streamlit.app/)
 
 **ExamPrepAI** is an AI-powered study assistant built with Streamlit. It helps students and learners generate study materials, practice questions, and summaries from their notes or textbooks using OpenAI's language models.
 
