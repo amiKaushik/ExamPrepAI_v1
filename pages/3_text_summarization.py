@@ -28,6 +28,9 @@ else:
         with col2:
             include_key_points = st.checkbox("Include Key Points", value=True)
             include_bullet_points = st.checkbox("Use Bullet Points", value=True)
+            include_code_examples = st.checkbox("Include Code Examples", value=True)
+
+    file_format = st.selectbox("Select file format for the summary:", ["TXT", "MD"])
 
     if st.button("📖 Generate Summary", use_container_width=True) and text:
         with st.spinner("Generating summary..."):
@@ -43,18 +46,28 @@ else:
                 prompt += " Include key points."
             if include_bullet_points:
                 prompt += " Use bullet points for better readability."
+            if include_code_examples:
+                prompt += " If the text involves programming concepts, include relevant code examples for the key points."
 
             summary = summarize_text(prompt, st.session_state['gemini_api_key'])
 
             st.markdown("### 📖 Generated Summary")
             st.markdown(summary)
 
-            st.download_button(
-                label="📥 Download Summary",
-                data=summary,
-                file_name="text_summary.md",
-                mime="text/markdown"
-            )
+            if file_format == "TXT":
+                st.download_button(
+                    label="📥 Download Summary (TXT)",
+                    data=summary,
+                    file_name="text_summary.txt",
+                    mime="text/plain"
+                )
+            elif file_format == "MD":
+                st.download_button(
+                    label="📥 Download Summary (MD)",
+                    data=summary,
+                    file_name="text_summary.md",
+                    mime="text/markdown"
+                )
 
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
