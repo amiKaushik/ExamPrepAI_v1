@@ -34,22 +34,10 @@ st.markdown("""
             color: #f1f1f1;
         }
     }
-
     @media (max-width: 768px) {
         .feature-card {
             padding: 1rem;
             font-size: 0.9rem;
-        }
-    }
-
-    section[data-testid="stSidebar"] {
-        background-color: #f8f9fa !important;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        section[data-testid="stSidebar"] {
-            background-color: #1e1e1e;
-            color: #fff;
         }
     }
 
@@ -86,13 +74,13 @@ st.markdown("""
         justify-content: space-between;
     }
 
+    /* General link styling */
     a {
         color: #64b5f6;
     }
     a:hover {
         text-decoration: underline;
     }
-
     .custom-footer {
         background-color: #1e1e1e;
         color: #ccc;
@@ -139,7 +127,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 if 'gemini_api_key' not in st.session_state:
-    st.sidebar.subheader("🔑 :blue[API Key Setup]")
+    st.sidebar.subheader("🔑 API Key Setup")
     gemini_key = st.sidebar.text_input("Enter your Gemini API key:", type="password")
     if gemini_key:
         st.session_state['gemini_api_key'] = gemini_key
