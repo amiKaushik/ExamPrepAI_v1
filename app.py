@@ -47,8 +47,9 @@ st.markdown("""
 
     /* Sidebar styling */
     section[data-testid="stSidebar"] {
-        background-color: #f8f9fa;
+        background-color: #f8f9fa !important; /* Force sidebar to stay white */
     }
+
     @media (prefers-color-scheme: dark) {
         section[data-testid="stSidebar"] {
             background-color: #1e1e1e;
