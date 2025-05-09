@@ -57,9 +57,10 @@ else:
             st.markdown(notes)
 
             if file_format == "TXT":
+                plain_text = notes.replace('#', '').replace('##', '').replace('###', '').replace('*', '').replace('**', '')
                 st.download_button(
                     label="📥 Download Notes as TXT",
-                    data=notes,
+                    data=plain_text,
                     file_name=f"study_notes_{topic.replace(' ', '_')}.txt",
                     mime="text/plain"
                 )
