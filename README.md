@@ -56,7 +56,7 @@ Navigate through the sidebar to access different tools:
 
 - `app.py` – Main entry point.
 - `pages/` – Individual Streamlit pages.
-- `utils/` – Backend logic and OpenAI interaction.
+- `utils/` – Backend logic and Google Gemini AI interaction.
 - `.streamlit/` – Config files for Streamlit.
 
 ## License
