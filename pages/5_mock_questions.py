@@ -47,12 +47,21 @@ else:
             st.markdown("### 📖 Generated Questions")
             st.markdown(questions)
             
-            st.download_button(
-                label="📥 Download Questions",
-                data=questions,
-                file_name=f"mock_questions_{subject.replace(' ', '_')}.txt",
-                mime="text/plain"
-            )
+            col1, col2 = st.columns(2)
+            with col1:
+                st.download_button(
+                    label="📥 Download as TXT",
+                    data=questions,
+                    file_name=f"mock_questions_{subject.replace(' ', '_')}.txt",
+                    mime="text/plain"
+                )
+            with col2:
+                st.download_button(
+                    label="📥 Download as Markdown",
+                    data=questions,
+                    file_name=f"mock_questions_{subject.replace(' ', '_')}.md",
+                    mime="text/markdown"
+                )
             
             st.markdown("---")
             st.markdown("### 💭 Was this helpful?")
