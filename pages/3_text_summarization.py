@@ -29,7 +29,7 @@ else:
             include_key_points = st.checkbox("Include Key Points", value=True)
             include_bullet_points = st.checkbox("Use Bullet Points", value=True)
 
-    format_choice = st.radio("Choose File Format", ("txt", "Markdown"))
+    format_choice = st.radio("Choose File Format", ("txt", "md"))
 
     if st.button("📖 Generate Summary", use_container_width=True) and text:
         with st.spinner("Generating summary..."):
@@ -52,7 +52,8 @@ else:
             st.markdown(summary)
 
             if format_choice == "txt":
-                file_data = summary
+                summary_txt = summary.replace("**", "").replace("*", "").replace("## ", "").replace("\n\n", "\n")
+                file_data = summary_txt
                 file_name = "text_summary.txt"
                 mime_type = "text/plain"
             else:
