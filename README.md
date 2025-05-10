@@ -31,10 +31,10 @@
    pip install -r requirements.txt
    ```
 
-4. **Set OpenAI API Key**
+4. **Set Gemini API Key**
    Create a `.streamlit/secrets.toml` file and add your key:
    ```toml
-   OPENAI_API_KEY = "your-openai-api-key"
+   GEMINI_API_KEY = "your-gemini-api-key"
    ```
 
 ## Usage
